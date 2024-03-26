@@ -77,33 +77,49 @@ function stringToColor(str) {
 
 function renderTypeMj(type) {
     switch (type) {
-      case 'IMAGINE':
-        return <Tag color="blue" size='large'>绘图</Tag>;
-      case 'UPSCALE':
-        return <Tag color="orange" size='large'>放大</Tag>;
-      case 'VARIATION':
-        return <Tag color="purple" size='large'>变换</Tag>;
-      case 'DESCRIBE':
-        return <Tag color="yellow" size='large'>图生文</Tag>;
-      case 'BLEAND':
-        return <Tag color="lime" size='large'>图混合</Tag>;
-      default:
-        return <Tag color="black" size='large'>未知</Tag>;
-    }
+        case 'IMAGINE':
+          return <Tag color="blue" size='large'>绘图</Tag>;
+        case 'ACTION':
+          return <Tag color="purple" size='large'>按钮变化</Tag>;
+        case 'INPAINT':
+          return <Tag color="purple" size='large'>局部重绘</Tag>;
+        case 'CUSTOMZOOM':
+          return <Tag color="purple" size='large'>自定义变焦</Tag>;
+        case 'MODAL':
+          return <Tag color="light-blue" size='large'>窗口确认</Tag>;
+        case 'SHORTEN':
+          return <Tag color="blue" size='large'>prompt分析</Tag>
+        case 'SWAPFACE':
+          return <Tag color="blue" size='large'>换脸</Tag>
+        case 'UPSCALE':
+          return <Tag color="orange" size='large'>放大</Tag>;
+        case 'VARIATION':
+          return <Tag color="purple" size='large'>变换</Tag>;
+        case 'DESCRIBE':
+          return <Tag color="yellow" size='large'>图生文</Tag>;
+        case 'REROLL':
+          return <Tag color="lime" size='large'>重绘</Tag>
+        case 'BLEND':
+          return <Tag color="cyan" size='large'>图混合</Tag>;
+        case 'UPLOADS':
+          return <Tag color="blue" size='large'>上传文件</Tag>
+        default:
+          return <Tag color="black" size='large'>未知</Tag>;
+      }
   }
   
   
   function renderCode(code) {
     switch (code) {
-      case 1:
-        return <Tag color="green" size='large'>已提交</Tag>;
-      case 21:
-        return <Tag color="lime" size='large'>排队中</Tag>;
-      case 22:
-        return <Tag color="orange" size='large'>重复提交</Tag>;
-      default:
-        return <Tag color="black" size='large'>未知</Tag>;
-    }
+        case 1:
+          return <Tag color="green" size='large'>已提交</Tag>;
+        case 21:
+          return <Tag color="lime" size='large'>等待中</Tag>;
+        case 22:
+          return <Tag color="orange" size='large'>排队中</Tag>;
+        default:
+          return <Tag color="black" size='large'>未知</Tag>;
+      }
   }
   
   
@@ -498,13 +514,12 @@ const LogsTable = () => {
             // 安全检查subscription response
             if (subscription.data && typeof subscription.data === 'object') {
                 const subscriptionData = subscription.data;
-    
+                console.log(subscription.data);
                 const usageRes = await API.get(`${process.env.REACT_APP_BASE_URL}/v1/dashboard/billing/usage`, {headers: {Authorization: `Bearer ${key}`}});
                 // 安全检查usage response
                 if (usageRes.data && typeof usageRes.data === 'object') {
                     const usageData = usageRes.data;
     
-                    // 假设我们要设置的是balance和usage而不是直接操作data状态
                     setBalance(subscriptionData.hard_limit_usd);
                     setUsage(usageData.total_usage / 100);
                 } else {
