@@ -7,7 +7,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# 运行阶段，使用Nginx
+# 运行阶段，使用node
 FROM node:18
 
 # 安装 serve
