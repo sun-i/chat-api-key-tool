@@ -610,10 +610,10 @@ const LogsTable = () => {
                 {process.env.REACT_APP_SHOW_BALANCE === "true" && (
                     <Space>
                         <Tag color="green" style={{ fontSize: '16px' }}>
-                            余额：${balance.toFixed(5)}
+                            余额：${balance}
                         </Tag>
                         <Tag color="blue" style={{ fontSize: '16px' }}>
-                            已用：${usage.toFixed(5)}
+                            已用：${usage}
                         </Tag>
                     </Space>
                 )}
